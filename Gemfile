@@ -1,6 +1,5 @@
 source "http://rubygems.org"
 
-gem 'shadow_puppet'
 gem 'capistrano'
 
 # Add dependencies to develop your gem here.
