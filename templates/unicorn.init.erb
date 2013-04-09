@@ -34,50 +34,50 @@ old_pid="$PIDFILE.oldbin"
 cd $APP_ROOT || exit 1
 
 sig () {
-	test -s "$PIDFILE" && kill -$1 `cat $PIDFILE`
+  test -s "$PIDFILE" && kill -$1 `cat $PIDFILE`
 }
 
 oldsig () {
-	test -s $old_pid && kill -$1 `cat $old_pid`
+  test -s $old_pid && kill -$1 `cat $old_pid`
 }
 
 case $1 in
 start)
   echo -n "Starting $DESC: "
-	sig 0 && echo >&2 "Already running" && exit 0
-	$CMD
-	echo "$NAME."
-	;;
+  sig 0 && echo >&2 "Already running" && exit 0
+  $CMD
+  echo "$NAME."
+  ;;
 stop)
   echo -n "Stopping $DESC: "
-	sig QUIT && exit 0
-	echo "$NAME."
-	;;
+  sig QUIT && exit 0
+  echo "$NAME."
+  ;;
 force-stop)
 echo -n "Force-stopping $DESC: "
-	sig TERM && exit 0
-	echo "$NAME."
-	;;
+  sig TERM && exit 0
+  echo "$NAME."
+  ;;
 restart|reload)
   echo -n "Restarting $DESC: "
-	sig HUP && echo "$NAME." && exit 0
-	echo -n >&2 "Couldn't reload, starting '$CMD' instead: "
-	$CMD
-	echo "$NAME."
-	;;
+  sig HUP && echo "$NAME." && exit 0
+  echo -n >&2 "Couldn't reload, starting '$CMD' instead: "
+  $CMD
+  echo "$NAME."
+  ;;
 upgrade)
   echo -n "Upgrading $DESC: "
-	sig USR2 && echo "$NAME." && exit 0
-	echo -n >&2 "Couldn't upgrade, starting '$CMD' instead: "
-	$CMD
-	echo "$NAME."
-	;;
+  sig USR2 && echo "$NAME." && exit 0
+  echo -n >&2 "Couldn't upgrade, starting '$CMD' instead: "
+  $CMD
+  echo "$NAME."
+  ;;
 rotate)
   sig USR1 && echo rotated logs OK && exit 0
   echo >&2 "Couldn't rotate logs" && exit 1
   ;;
 *)
-	echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
-	exit 1
-	;;
+  echo >&2 "Usage: $0 <start|stop|restart|upgrade|rotate|force-stop>"
+  exit 1
+  ;;
 esac
