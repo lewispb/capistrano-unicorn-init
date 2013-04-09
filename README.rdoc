@@ -12,41 +12,30 @@ However, it works (for us) and we'd be happy to get your input!
 
 Add the library to your `Gemfile`:
 
-```ruby
-group :development do
-  gem 'capistrano-unicorn-init', :require => false
-end
-```
+  group :development do
+    gem 'capistrano-unicorn-init', :require => false
+  end
 
 And load it into your deployment script `config/deploy.rb`:
 
-```ruby
-require 'capistrano-unicorn-init'
-```
+  require 'capistrano-unicorn-init'
 
 To setup the init file:
-```ruby
-cap unicorn:setup
-```
+  cap unicorn:setup
 
 Create a new configuration file `config/unicorn.rb` or `config/unicorn/STAGE.rb`, where stage is your deployment environment.
 
 Example config - [examples/unicorn.rb](https://github.com/ValencePM/capistrano-unicorn-init/blob/master/examples/unicorn.rb). Please refer to unicorn documentation for more examples and configuration options.
 
 To deploy the unicorn config file:
-```ruby
-cap unicorn:update_config
-```
+  cap unicorn:update_config
 
 You may want to automatically update the config file when you deploy:
-```ruby
-after 'deploy:restart', 'unicorn:update_config'
-```
+  after 'deploy:restart', 'unicorn:update_config'
+
 
 Add unicorn restart task hook:
-```ruby
-after 'deploy:restart', 'unicorn:upgrade'  # app preloaded
-```
+  after 'deploy:restart', 'unicorn:upgrade'
 
 == Thanks
 
