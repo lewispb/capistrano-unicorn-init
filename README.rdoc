@@ -1,9 +1,60 @@
 = capistrano-unicorn-init
 
-Description goes here.
+Capistrano plugin that provides support for managing Unicorn! via an init
+script and capistrano.
+
+WARNING: This is a very new plugin/gem and will likely change drastically.
+However, it works (for us) and we'd be happy to get your input!
+
+== Usage
+
+=== Setup
+
+Add the library to your `Gemfile`:
+
+```ruby
+group :development do
+  gem 'capistrano-unicorn-init', :require => false
+end
+```
+
+And load it into your deployment script `config/deploy.rb`:
+
+```ruby
+require 'capistrano-unicorn-init'
+```
+
+To setup the init file:
+```ruby
+cap unicorn:setup
+```
+
+Create a new configuration file `config/unicorn.rb` or `config/unicorn/STAGE.rb`, where stage is your deployment environment.
+
+Example config - [examples/unicorn.rb](https://github.com/ValencePM/capistrano-unicorn-init/blob/master/examples/unicorn.rb). Please refer to unicorn documentation for more examples and configuration options.
+
+To deploy the unicorn config file:
+```ruby
+cap unicorn:update_config
+```
+
+You may want to automatically update the config file when you deploy:
+```ruby
+after 'deploy:restart', 'unicorn:update_config'
+```
+
+Add unicorn restart task hook:
+```ruby
+after 'deploy:restart', 'unicorn:upgrade'  # app preloaded
+```
+
+== Thanks
+
+A big thanks to @sosedoff (capistrano-unicorn) @railsmachine (moonshine) for
+inspiration (and a bit of code I may have borrowed).
 
 == Contributing to capistrano-unicorn-init
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.
@@ -16,4 +67,3 @@ Description goes here.
 
 Copyright (c) 2013 Ryan Winograd. See LICENSE.txt for
 further details.
-
