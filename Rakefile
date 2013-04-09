@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "capistrano-unicorn-init"
   gem.homepage = "http://github.com/rylwin/capistrano-unicorn-init"
   gem.license = "MIT"
-  gem.summary = %Q{one-line summary of your gem}
-  gem.description = %Q{longer description of your gem}
+  gem.summary = %Q{Capistrano for Unicorn! as an init script}
+  gem.description = %Q{Capistrano for Unicorn! as an init script}
   gem.email = "ryan@thewinograds.com"
   gem.authors = ["Ryan Winograd"]
   # dependencies defined in Gemfile

@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "capistrano-unicorn-init.gemspec",
+    "examples/unicorn.rb",
     "lib/capistrano-unicorn-init.rb",
     "lib/capistrano-unicorn-init/manifest.rb",
     "recipes/unicorn-init.rb",
@@ -45,6 +46,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<shadow_puppet>, [">= 0"])
+      s.add_runtime_dependency(%q<capistrano>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<yard>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -52,6 +54,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<simplecov>, [">= 0"])
     else
       s.add_dependency(%q<shadow_puppet>, [">= 0"])
+      s.add_dependency(%q<capistrano>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<yard>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -60,6 +63,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<shadow_puppet>, [">= 0"])
+    s.add_dependency(%q<capistrano>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<yard>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 0"])
