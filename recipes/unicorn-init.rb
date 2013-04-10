@@ -104,6 +104,7 @@ module Capistrano
               config = secondary
             end
 
+            run "mkdir -p #{fetch(:deploy_to)}/shared/config"
             upload config, "#{fetch(:deploy_to)}/shared/config/unicorn.rb"
           end
 
