@@ -15,6 +15,8 @@ module Capistrano
     def self.load_into(configuration)
       configuration.load do
 
+        _cset :ruby_binary, 'ruby'
+
         def init_filename
           "#{fetch(:application)}-unicorn"
         end
@@ -24,9 +26,7 @@ module Capistrano
         end
 
         def init_content
-          file = File.join(
-            File.dirname(__FILE__), '..', 'templates', 'unicorn.init.erb')
-          template(file, binding)
+          template('unicorn.init.erb')
         end
 
         def setup_init
@@ -44,9 +44,7 @@ module Capistrano
         end
 
         def binary_content
-          file = File.join(
-            File.dirname(__FILE__), '..', 'templates', 'unicorn.exec')
-          File.read(file)
+          template('unicorn.exec.erb')
         end
 
         def binary_path
@@ -60,17 +58,13 @@ module Capistrano
           run "chmod +x #{binary_path}"
         end
 
-        def template(pathname, b = binding)
-          pathname = Pathname.new(pathname) unless pathname.kind_of?(Pathname)
+        def template(template_filename)
+          filename = File.join(
+            File.dirname(__FILE__), '..', 'templates', template_filename)
 
-          pathname = if pathname.exist?
-                       pathname
-                     else
-                       raise LoadError, "Can't find template #{pathname}"
-                     end
-          erb = ERB.new(pathname.read)
-          erb.filename = pathname.to_s
-          erb.result(b)
+          erb = ERB.new(File.read(filename))
+          erb.filename = filename
+          erb.result(binding)
         end
 
         namespace :unicorn do
