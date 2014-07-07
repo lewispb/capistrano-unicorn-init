@@ -83,12 +83,12 @@ module Capistrano
 
           desc "stop unicorn"
           task :stop do
-            sudo "#{init_path} stop"
+            "#{init_path} stop"
           end
 
           desc "start unicorn"
           task :start do
-            sudo "#{init_path} start"
+            "#{init_path} start"
           end
 
           desc "Update the config file"
