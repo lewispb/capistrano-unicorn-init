@@ -11,8 +11,8 @@
 
 NAME=<%= init_filename %>
 DESC="unicorn"
-CONFIG="<%= "#{fetch(:deploy_to)}/shared/config/unicorn.rb" %>"
-PIDFILE="<%= "#{fetch(:deploy_to)}/shared/pids/unicorn.pid" %>"
+CONFIG="<%= "#{fetch(:deploy_to)}/current/config/unicorn.rb" %>"
+PIDFILE="<%= "#{fetch(:deploy_to)}/current/pids/unicorn.pid" %>"
 BINARY="<%= "#{fetch(:deploy_to)}/shared/binary/unicorn" %>"
 
 set -u
